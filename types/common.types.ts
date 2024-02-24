@@ -1,3 +1,5 @@
+import { jobApplicationStatus } from "@/utils/constants";
+
 export type CandidateContact = {
   email: string;
   phone: string;
@@ -9,16 +11,14 @@ export type CandidateReferredBy = {
   id: string;
 };
 
-export type JobApplicationStatus =
-  | "SHORTLISTED"
-  | "REJECTED"
-  | "APPLIED"
-  | "EXTERNAL";
+export type JobApplicationStatus = keyof typeof jobApplicationStatus;
 
 export type JobApplicationProgressUpdatedBy = CandidateReferredBy;
 
 export type CandidateJobApplicationProgress = {
   status: JobApplicationStatus;
+  updatedBy: JobApplicationProgressUpdatedBy;
+  updatedOn: Date;
 };
 
 export type Candidate = {
@@ -34,11 +34,7 @@ export type Candidate = {
   contact: CandidateContact;
   referredBy: CandidateReferredBy;
   resume: string;
-  jobApplicationProgress: {
-    status: JobApplicationStatus;
-    updatedBy: JobApplicationProgressUpdatedBy;
-    updatedOn: Date;
-  };
+  jobApplicationProgress: CandidateJobApplicationProgress;
 };
 
 type CommonCardProps = {
@@ -50,9 +46,12 @@ type CommonCardProps = {
   jobApplicationProgress: Candidate["jobApplicationProgress"];
 };
 
-export type RejectedCardProps = CommonCardProps;
+export type RejectedCardProps = {
+  variant: (typeof jobApplicationStatus)["REJECTED"];
+} & CommonCardProps;
 
 export type AppliedCardProps = CommonCardProps & {
+  variant: (typeof jobApplicationStatus)["APPLIED"];
   experience: Candidate["experience"];
   isHoldingOffer: Candidate["isHoldingOffer"];
   noticePeriod: Candidate["noticePeriod"];
@@ -60,8 +59,12 @@ export type AppliedCardProps = CommonCardProps & {
 };
 
 export type ShortlistedCardProps = CommonCardProps &
-  Pick<AppliedCardProps, "isHoldingOffer" | "experience" | "noticePeriod">;
+  Pick<AppliedCardProps, "isHoldingOffer" | "experience" | "noticePeriod"> & {
+    variant: (typeof jobApplicationStatus)["SHORTLISTED"];
+  };
 
 export type ExternalCardProps = {
   resume: string;
-} & Pick<AppliedCardProps, "noticePeriod" | "name" | "appliedOn">;
+} & Pick<AppliedCardProps, "noticePeriod" | "name" | "appliedOn"> & {
+    variant: (typeof jobApplicationStatus)["EXTERNAL"];
+  };

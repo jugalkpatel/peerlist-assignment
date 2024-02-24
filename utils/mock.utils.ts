@@ -20,14 +20,14 @@ function generateExperience() {
   let experience = "";
 
   if (years > 0) {
-    experience += `${years} ${years === 1 ? "year" : "years"}`;
+    experience += `${years}y`;
     if (months > 0) {
-      experience += `, `;
+      experience += ` `;
     }
   }
 
   if (months > 0) {
-    experience += `${months} ${months === 1 ? "month" : "months"}`;
+    experience += `${months}m`;
   }
 
   return experience;
@@ -64,7 +64,8 @@ export const candidates: Candidate[] = Array(50)
           name: faker.person.fullName(),
           profilePicture: faker.image.avatar(),
         },
-        status: generateRandomValue(jobApplicationStatus),
+        // status: generateRandomValue(jobApplicationStatus),
+        status: "REJECTED",
       },
     };
   });
