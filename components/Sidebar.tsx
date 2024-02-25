@@ -10,7 +10,6 @@ import {
   Search,
   Users,
   Menu,
-  MenuIcon,
 } from "lucide-react";
 import { ActionButton, ActionIcon } from "./Header";
 import { useEffect, useState } from "react";

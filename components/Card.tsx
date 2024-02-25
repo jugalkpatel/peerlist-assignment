@@ -65,9 +65,13 @@ export default function Card(props: CardProps) {
             className="rounded-full"
           />
         )}
-        <p className={`${textConfig["xx-small-text"]} text-txt-secondary`}>
-          Applied {timeAgo(appliedOn)} ago
-        </p>
+        {isApplied && props.referredBy ? (
+          <ReferredBy {...props.referredBy} />
+        ) : (
+          <p className={`${textConfig["xx-small-text"]} text-txt-secondary`}>
+            Applied {timeAgo(appliedOn)} ago
+          </p>
+        )}
       </div>
 
       <div className="flex flex-col">
@@ -99,6 +103,25 @@ export default function Card(props: CardProps) {
       {(isShortListed || isRejected) && (
         <ApplicationStatus {...props.jobApplicationProgress} />
       )}
+    </div>
+  );
+}
+
+function ReferredBy({
+  name,
+  profilePicture,
+}: Exclude<AppliedCardProps["referredBy"], null>) {
+  return (
+    <div className="text-xs flex items-center gap-[3px]">
+      <span className="text-txt-secondary">Ref by</span>{" "}
+      <Image
+        src={profilePicture}
+        height={16}
+        width={16}
+        alt="referrer-profile"
+        className="rounded-full"
+      />
+      <span className="font-semibold text-txt-secondary">{name}</span>
     </div>
   );
 }

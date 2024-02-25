@@ -33,6 +33,10 @@ function generateExperience() {
   return experience;
 }
 
+function maybeReturn<T>(value: T): T | null {
+  return Math.random() > 0.5 ? value : null;
+}
+
 export const candidates: Candidate[] = Array(50)
   .fill(1)
   .map((_) => {
@@ -50,11 +54,11 @@ export const candidates: Candidate[] = Array(50)
         email: faker.internet.email(),
         phone: faker.phone.number(),
       },
-      referredBy: {
-        name: faker.person.fullName(),
+      referredBy: maybeReturn({
+        name: faker.person.firstName(),
         profilePicture: faker.image.avatar(),
         id: faker.string.uuid(),
-      },
+      }),
       resume:
         "https://drive.google.com/file/d/1u7sE_YeAy0G7oLO8OJKmGrC4yr1ZgGTF/view",
       jobApplicationProgress: {
