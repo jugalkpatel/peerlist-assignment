@@ -62,7 +62,7 @@ export function Sidebar() {
   }, [isDesktop]);
 
   return (
-    <div className="border-r border-border-primary bg-white fixed top-0 left-0 lg:static p-3 lg:pl-6 lg:pt-4 gap-8 flex w-full justify-between lg:justify-normal lg:flex-col z-10">
+    <div className="border-r border-border-primary bg-white fixed top-0 left-0 lg:static p-3 lg:pl-6 lg:pt-4 gap-8 flex w-full justify-between lg:justify-normal lg:flex-col z-20">
       <div className="relative ">
         <div className="flex gap-2 ">
           <ActionButton

@@ -88,7 +88,7 @@ export function ApplicantDashboard() {
       <div className="grid grid-rows-1 grid-cols-1 h-screen relative lg:grid-cols-[minmax(100px,_212px),_1fr]">
         <Sidebar />
         <div className="overflow-auto">
-          <div className="sticky top-[60px] lg:top-0">
+          <div className="sticky top-[60px] lg:top-0 z-10">
             <Header />
             <Search />
           </div>
