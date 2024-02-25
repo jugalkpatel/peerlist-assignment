@@ -64,8 +64,7 @@ export const candidates: Candidate[] = Array(50)
           name: faker.person.fullName(),
           profilePicture: faker.image.avatar(),
         },
-        // status: generateRandomValue(jobApplicationStatus),
-        status: "APPLIED",
+        status: generateRandomValue(jobApplicationStatus),
       },
     };
   });

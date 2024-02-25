@@ -13,7 +13,6 @@ import {
 } from "@dnd-kit/sortable";
 import { useApplicantStore } from "@/stores/counter-store-provider";
 import { selectApplicants } from "@/stores/counter-store";
-import Card from "./Card";
 
 type PaneVariants = Exclude<JobApplicationStatus, "EXTERNAL">;
 
@@ -47,14 +46,10 @@ const statusToLabelMapping: Record<PaneVariants, string> = {
 };
 
 export function Pane({ variant, count, ...props }: PaneProps) {
-  const { isOver, setNodeRef } = useDroppable({
+  const { setNodeRef } = useDroppable({
     id: variant,
   });
   const applicants = useApplicantStore(selectApplicants(variant));
-
-  const style = {
-    color: isOver ? "green" : undefined,
-  };
 
   const icon =
     variant === "SHORTLISTED" ? (
@@ -66,14 +61,12 @@ export function Pane({ variant, count, ...props }: PaneProps) {
     );
 
   const items = applicants.order.map((id) => applicants.data[id]);
-  // console.log({ items });
   return (
     <div
       className={cn(
         `bg-white border rounded-lg ${bordersBackground[variant]}`,
         props.className
       )}
-      style={style}
     >
       <div
         className={`flex items-center rounded-t-lg p-2 gap-2 ${variantsBackground[variant]}`}
@@ -84,25 +77,11 @@ export function Pane({ variant, count, ...props }: PaneProps) {
         </p>
       </div>
       <SortableContext
-        id={variant}
+        id={variant as string}
         items={items}
         strategy={verticalListSortingStrategy}
       >
-        <div
-          className="p-2 flex flex-col gap-2 h-full"
-          ref={setNodeRef}
-          style={style}
-        >
-          {items.map((i) => {
-            return (
-              <Card
-                key={i.id}
-                variant={i.jobApplicationProgress.status}
-                {...i}
-              />
-            );
-          })}
-        </div>
+        <div ref={setNodeRef}>{props.children}</div>
       </SortableContext>
     </div>
   );

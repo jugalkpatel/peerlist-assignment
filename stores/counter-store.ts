@@ -11,10 +11,6 @@ function filterApplicants(
   return candidates.filter((i) => i.jobApplicationProgress.status === status);
 }
 
-// const rejectedCandidates = filterApplicants("REJECTED", candidates);
-// const appliedCandidates = filterApplicants("APPLIED", candidates);
-// const shortListedCandidates = filterApplicants("SHORTLISTED", candidates);
-
 function getDataState(candidates: Candidate[]): ApplicantData {
   return candidates.reduce((acc: ApplicantData, candidate) => {
     acc[candidate.id] = candidate;
@@ -36,10 +32,12 @@ export type ApplicantStateValue = {
   data: ApplicantData;
 };
 
+export type Panes = {
+  [k in JobApplicationStatus]: ApplicantStateValue;
+};
+
 export type ApplicantsState = {
-  panes: {
-    [k in JobApplicationStatus]: ApplicantStateValue;
-  };
+  panes: Panes;
   activeId: UniqueIdentifier;
 };
 
@@ -50,29 +48,17 @@ export type ApplicantActions = {
   setActiveIdFn: (id: UniqueIdentifier) => void;
 };
 
-export type ApplicantStore = ApplicantsState & ApplicantActions;
+function findContainer(panes: Panes, id: string): JobApplicationStatus {
+  if (id in panes) {
+    return id as JobApplicationStatus;
+  }
 
-// export const initApplicantState = (): ApplicantsState => {
-//   return {
-//     activeId: "",
-//     APPLIED: {
-//       data: getDataState(appliedCandidates),
-//       order: getApplicantIds(appliedCandidates),
-//     },
-//     SHORTLISTED: {
-//       data: getDataState(shortListedCandidates),
-//       order: getApplicantIds(shortListedCandidates),
-//     },
-//     REJECTED: {
-//       data: getDataState(rejectedCandidates),
-//       order: getApplicantIds(rejectedCandidates),
-//     },
-//     EXTERNAL: {
-//       data: {},
-//       order: [],
-//     },
-//   };
-// };
+  return Object.keys(panes).find((i) =>
+    panes[i as JobApplicationStatus].order.includes(id)
+  ) as JobApplicationStatus;
+}
+
+export type ApplicantStore = ApplicantsState & ApplicantActions;
 
 const initialApplicantState: ApplicantsState = {
   panes: {
@@ -129,13 +115,8 @@ export const createCounterStore = (
           const activeIdAsString = String(activeId);
           const overIdAsString = String(overId);
           const panes = state.panes;
-          const activeContainer = Object.keys(panes).find((i) =>
-            panes[i as JobApplicationStatus].order.includes(activeIdAsString)
-          ) as JobApplicationStatus;
-          const overContainer = Object.keys(panes).find((i) =>
-            panes[i as JobApplicationStatus].order.includes(overIdAsString)
-          ) as JobApplicationStatus;
-          console.log({ activeContainer, overContainer });
+          const activeContainer = findContainer(panes, activeIdAsString);
+          const overContainer = findContainer(panes, overIdAsString);
           if (
             activeContainer &&
             overContainer &&
@@ -170,12 +151,8 @@ export const createCounterStore = (
           const activeIdAsString = String(activeId);
           const overIdAsString = String(overId);
           const panes = state.panes;
-          const activeContainer = Object.keys(panes).find((i) =>
-            panes[i as JobApplicationStatus].order.includes(activeIdAsString)
-          ) as JobApplicationStatus;
-          const overContainer = Object.keys(panes).find((i) =>
-            panes[i as JobApplicationStatus].order.includes(overIdAsString)
-          ) as JobApplicationStatus;
+          const activeContainer = findContainer(panes, activeIdAsString);
+          const overContainer = findContainer(panes, overIdAsString);
 
           if (
             activeContainer &&
@@ -241,4 +218,6 @@ export const selectApplicantWithId =
     const status = Object.keys(panes).find((i) =>
       panes[i as JobApplicationStatus].order.includes(id)
     ) as JobApplicationStatus;
+
+    return panes[status].data[id];
   };
