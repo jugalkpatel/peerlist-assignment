@@ -4,9 +4,11 @@ import { HTMLAttributes } from "react";
 export function CardsContainer(props: HTMLAttributes<HTMLDivElement>) {
   return (
     <div
-      id="something"
       {...props}
-      className={cn("p-2 flex flex-col gap-2 h-full", props.className)}
+      className={cn(
+        "p-2 flex flex-col gap-2 h-full bg-primaryBackground lg:min-h-[calc(100vh-280px)]",
+        props.className
+      )}
     >
       {props.children}
     </div>

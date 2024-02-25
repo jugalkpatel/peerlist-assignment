@@ -5,8 +5,8 @@ export function Search() {
   const [value, onChange] = useQueryParamState<string>("q", "");
 
   return (
-    <div className="relative ">
-      <span className="absolute inset-y-0 left-0 flex items-center pl-2">
+    <div className="relative p-4 bg-white">
+      <span className="absolute top-[29px] left-4 flex items-center pl-2">
         <SearchIcon className="w-4 h-4" />
       </span>
       <input
