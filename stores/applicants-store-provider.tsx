@@ -4,7 +4,7 @@ import { type StoreApi, useStore } from "zustand";
 import {
   type ApplicantStore,
   createCounterStore,
-} from "@/stores/counter-store";
+} from "@/stores/applicant-store";
 
 export const ApplicantStoreContext =
   createContext<StoreApi<ApplicantStore> | null>(null);

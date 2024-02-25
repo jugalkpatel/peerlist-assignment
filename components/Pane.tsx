@@ -11,8 +11,8 @@ import {
   SortableContext,
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
-import { useApplicantStore } from "@/stores/counter-store-provider";
-import { selectApplicants } from "@/stores/counter-store";
+import { useApplicantStore } from "@/stores/applicants-store-provider";
+import { selectApplicants } from "@/stores/applicant-store";
 
 type PaneVariants = Exclude<JobApplicationStatus, "EXTERNAL">;
 

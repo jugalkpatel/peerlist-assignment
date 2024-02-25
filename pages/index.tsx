@@ -17,11 +17,11 @@ import {
   setApplicantsToStore,
   setDragEndFn,
   setDragOverFn,
-} from "@/stores/counter-store";
+} from "@/stores/applicant-store";
 import {
   CounterStoreProvider,
   useApplicantStore,
-} from "@/stores/counter-store-provider";
+} from "@/stores/applicants-store-provider";
 import { Search } from "@/components/Search";
 import { RejectedPane } from "@/components/RejectedPane";
 import { AppliedPane } from "@/components/AppliedPane";
