@@ -16,8 +16,10 @@ const config: Config = {
       },
       colors: {
         "border-primary": "#E1E4E8",
+        actionBorder: "#D1D5DA",
         "txt-primary": "#0D0D0D",
         "txt-secondary": "#6A737D",
+        iconPrimary: "#24292E",
         error: "#EB5757",
         success: "#00AA45",
         primaryBackground: "#FAFBFC",

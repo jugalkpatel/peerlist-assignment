@@ -114,6 +114,8 @@ function CandidateName(props: HTMLAttributes<HTMLHeadingElement>) {
   );
 }
 
+const applicantStatusClasses = "flex flex-wrap gap-1";
+
 function ApplicationStatus(props: CandidateJobApplicationProgress) {
   const { status, updatedBy, updatedOn } = props;
   // TODO: figure out why we need to pass explicit color values even
@@ -135,20 +137,24 @@ function ApplicationStatus(props: CandidateJobApplicationProgress) {
   const textClasses = `${textConfig["xx-small-text"]} text-txt-secondary`;
 
   return (
-    <div className="flex items-center gap-1">
-      {icon}
-      <p className={textClasses}>{statusText} by</p>
-      <Image
-        src={updatedBy.profilePicture}
-        height={16}
-        width={16}
-        alt="updater-profile"
-        className="rounded-full"
-      />
-      <p className={`${textClasses}`}>
-        <span className="font-semibold">{updatedBy.name}</span> on{" "}
-        {formatDate(updatedOn)}
-      </p>
+    <div className={applicantStatusClasses}>
+      <div className={applicantStatusClasses}>
+        {icon}
+        <p className={textClasses}>{statusText} by</p>
+      </div>
+      <div className={applicantStatusClasses}>
+        <Image
+          src={updatedBy.profilePicture}
+          height={16}
+          width={16}
+          alt="updater-profile"
+          className="rounded-full"
+        />
+        <p className={`${textClasses}`}>
+          <span className="font-semibold">{updatedBy.name}</span> on{" "}
+          {formatDate(updatedOn)}
+        </p>
+      </div>
     </div>
   );
 }
@@ -204,7 +210,7 @@ function CandidateJobFit({
 }: CandidateJobFitProps) {
   const noticePeriodText = getNoticePeriodText(noticePeriod);
   return (
-    <CandidateDetailsLayout className="gap-4 flex-row">
+    <CandidateDetailsLayout className="gap-4 flex-row flex-wrap">
       <CandidateDetailsLayout>
         <CandidateDetailsLabel>Experience</CandidateDetailsLabel>
         <CandidateDetailsValue>{experience}</CandidateDetailsValue>

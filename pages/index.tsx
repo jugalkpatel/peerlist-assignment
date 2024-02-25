@@ -26,6 +26,8 @@ import { Search } from "@/components/Search";
 import { RejectedPane } from "@/components/RejectedPane";
 import { AppliedPane } from "@/components/AppliedPane";
 import { ShortlistedPane } from "@/components/ShortlistedPane";
+import { Header } from "@/components/Header";
+import { Sidebar } from "@/components/Sidebar";
 
 function OverlayCard() {
   const activeId = useApplicantStore(selectActiveId);
@@ -49,7 +51,6 @@ export function ApplicantDashboard() {
 
   const handleDragOver = (e: DragOverEvent) => {
     const { active, over } = e;
-    console.log("over", { active, over });
     const { id: activeId } = active;
     const overId = over?.id || null;
 
@@ -84,13 +85,19 @@ export function ApplicantDashboard() {
       onDragOver={handleDragOver}
       collisionDetection={closestCenter}
     >
-      <div className="m-8 flex flex-col gap-4">
-        <Search />
-        <div className="bg-white h-vh grid grid-cols-3 gap-4">
-          <RejectedPane />
-          <AppliedPane />
-          <ShortlistedPane />
-        </div>{" "}
+      <div className="grid grid-rows-1 grid-cols-1 h-screen relative lg:grid-cols-[minmax(100px,_212px),_1fr]">
+        <Sidebar />
+        <div className="overflow-auto">
+          <div className="sticky top-[60px] lg:top-0">
+            <Header />
+            <Search />
+          </div>
+          <div className="bg-white grid grid-auto-rows grid-cols-1 sm:grid-cols-3 sm:grid-rows-1 gap-4 p-4 pt-16 lg:pt-0">
+            <RejectedPane />
+            <AppliedPane />
+            <ShortlistedPane />
+          </div>
+        </div>
       </div>
       <DragOverlay>{activeId ? <OverlayCard /> : null}</DragOverlay>
     </DndContext>
