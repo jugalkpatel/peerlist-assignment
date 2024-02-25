@@ -14,21 +14,30 @@ import akash from "@/public/images/akash.svg";
 
 export function Header() {
   return (
-    <div className="bg-primaryBackground p-8 border-b border-border-primary">
-      <div className="grid grid-cols-[56px,_1fr] grid-rows-1 gap-4">
+    <div className="bg-primaryBackground p-4 md:p-8 border-b border-border-primary">
+      <div className="grid grid-cols-[40px,_1fr] sm:grid-cols-[56px,_1fr] grid-rows-1 gap-4">
         <div className="border border-border-primary rounded-xl p-2 grid place-items-center h-fit w-fit">
-          <Image src={peerlistLogo} height={40} width={40} alt="logo" />
+          <div className="h-7 w-7 sm:h-10 sm:w-10 relative">
+            <Image src={peerlistLogo} alt="logo" fill={true} />
+          </div>
         </div>
         <div className="flex flex-col gap-6">
           <div className="flex flex-col gap-1 lg:gap-0">
-            <div className="flex justify-between items-start">
-              <div className="flex gap-2 items-center">
-                <p className="text-md text-txt-primary font-semibold">
-                  Software Engineer, Frontend
-                </p>
-                <ActionButton className="border-0 p-0">
-                  <ChevronDown className="w-4 h-4" />
-                </ActionButton>
+            <div className="flex justify-between items-start flex-col gap-2 sm:flex-row">
+              <div>
+                <div className="flex gap-2 items-center">
+                  <p className="text-md text-txt-primary font-semibold">
+                    Software Engineer, Frontend
+                  </p>
+                  <ActionButton className="border-0 p-0">
+                    <ChevronDown className="w-4 h-4" />
+                  </ActionButton>
+                </div>
+                <JobDetails
+                  company="Peerlist"
+                  employmentType="Full Time"
+                  location="Remote (United Stats, Canada)"
+                />
               </div>
               <div className="flex gap-2">
                 <ActionButton>
@@ -45,11 +54,6 @@ export function Header() {
                 </ActionButton>
               </div>
             </div>
-            <JobDetails
-              company="Peerlist"
-              employmentType="Full Time"
-              location="Remote (United Stats, Canada)"
-            />
           </div>
           <div className="flex flex-col gap-4 md:flex-row md:items-center justify-between md:gap-0">
             <div className="flex gap-4">
@@ -121,7 +125,7 @@ type JobDetailsProps = {
 
 function JobDetails({ company, employmentType, location }: JobDetailsProps) {
   return (
-    <p className="text-txt-primary text-sm">
+    <p className="text-txt-primary text-sm break-words">
       at {company} <DotBold /> {employmentType} <DotBold /> {location}
     </p>
   );
