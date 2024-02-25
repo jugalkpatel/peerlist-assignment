@@ -1,9 +1,10 @@
 import { SVGProps } from "react";
-import { X, Check } from "lucide-react";
+import { X, Check, MinusCircle, Circle, CheckCircle2 } from "lucide-react";
 import { twMerge } from "tailwind-merge";
 import { LucideProps } from "lucide-react";
+import { cn } from "@/utils/utils";
 
-const fixedWidthHeightVariant: LucideProps["className"] = "w-3 h-3";
+export const fixedWidthHeightVariant: LucideProps["className"] = "w-3 h-3";
 
 export const svgs = {
   verified: (props: SVGProps<SVGSVGElement> = {}) => {
@@ -78,26 +79,19 @@ export const svgs = {
     );
   },
   rejectedIcon: (props: LucideProps = {}) => {
-    return (
-      <X
-        {...props}
-        className={twMerge(
-          `${fixedWidthHeightVariant} text-error`,
-          props.className
-        )}
-      />
-    );
+    return <X width={15} height={15} color="#EB5757" {...props} />;
   },
   shortlistedIcon: (props: LucideProps = {}) => {
-    return (
-      <Check
-        {...props}
-        className={twMerge(
-          `${fixedWidthHeightVariant} text-success`,
-          props.className
-        )}
-      />
-    );
+    return <Check width={15} height={15} color="#00AA45" {...props} />;
+  },
+  rejectedContainerIcon: (props: LucideProps = {}) => {
+    return <MinusCircle width={15} height={15} color="#EB5757" {...props} />;
+  },
+  appliedContainerIcon: (props: LucideProps = {}) => {
+    return <Circle width={15} height={15} color="#0D0D0D" {...props} />;
+  },
+  shortlistedContainerIcon: (props: LucideProps = {}) => {
+    return <CheckCircle2 width={15} height={15} color="#00AA45" {...props} />;
   },
 } as const;
 
@@ -106,3 +100,9 @@ export const Verified = svgs["verified"];
 export const RejectedIcon = svgs["rejectedIcon"];
 
 export const ShortlistedIcon = svgs["shortlistedIcon"];
+
+export const RejectedContainerIcon = svgs["rejectedContainerIcon"];
+
+export const AppliedContainerIcon = svgs["appliedContainerIcon"];
+
+export const ShortListedContainerIcon = svgs["shortlistedContainerIcon"];

@@ -12,6 +12,8 @@ import { cn } from "@/utils/utils";
 import { ArrowUpRight } from "lucide-react";
 import Image from "next/image";
 import { HTMLAttributes } from "react";
+import { useSortable } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
 
 const textConfig = {
   "xx-small-text": "text-xxs leading-xxs",
@@ -24,7 +26,10 @@ type CardProps =
   | RejectedCardProps;
 
 export default function Card(props: CardProps) {
-  console.log({ props });
+  const { attributes, listeners, setNodeRef, transform, transition } =
+    useSortable({
+      id: props.id,
+    });
   const { variant, appliedOn, name } = props;
 
   const isShortListed = variant === "SHORTLISTED";
@@ -35,12 +40,19 @@ export default function Card(props: CardProps) {
 
   const isRejected = variant === "REJECTED";
 
-  if (!isExternal) {
-    console.log({ profile: props.profilePicture });
-  }
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+  };
 
   return (
-    <div className="p-4 border border-border-primary m-4 rounded-lg bg-white flex flex-col gap-2">
+    <div
+      className="p-4 border border-border-primary rounded-lg bg-white flex flex-col gap-2"
+      ref={setNodeRef}
+      style={style}
+      {...listeners}
+      {...attributes}
+    >
       <div className={`flex justify-between items-start`}>
         {isExternal ? (
           <CandidateName>{name}</CandidateName>
@@ -104,8 +116,6 @@ function CandidateName(props: HTMLAttributes<HTMLHeadingElement>) {
 
 function ApplicationStatus(props: CandidateJobApplicationProgress) {
   const { status, updatedBy, updatedOn } = props;
-  console.log({ status });
-
   // TODO: figure out why we need to pass explicit color values even
   // there are predefined values in icons
   const icon =
@@ -160,7 +170,7 @@ function CandidateDetailsLayout(props: HTMLAttributes<HTMLDivElement>) {
 const candidateJobFitLabel: HTMLAttributes<HTMLParagraphElement>["className"] = `${textConfig["xx-small-text"]} text-txt-secondary`;
 
 const candidateJobFitValue: HTMLAttributes<HTMLParagraphElement>["className"] =
-  "text-xs font-semibold text-txt-primary";
+  "text-xs font-semibold text-txt-primary break-words";
 
 function CandidateDetailsLabel(props: HTMLAttributes<HTMLParagraphElement>) {
   return (

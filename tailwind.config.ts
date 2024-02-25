@@ -20,6 +20,11 @@ const config: Config = {
         "txt-secondary": "#6A737D",
         error: "#EB5757",
         success: "#00AA45",
+        primaryBackground: "#FAFBFC",
+        rejectedBackground: "#FFEAEA",
+        appliedBackground: "#E1E4E8",
+        shortlistedBackground: "#E2F5EA",
+        borderShortlisted: "#E2F5EA",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",

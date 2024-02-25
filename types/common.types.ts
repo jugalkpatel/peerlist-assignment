@@ -38,6 +38,7 @@ export type Candidate = {
 };
 
 type CommonCardProps = {
+  id: Candidate["id"];
   appliedOn: Candidate["appliedOn"];
   profilePicture: Candidate["profilePicture"];
   name: Candidate["name"];
@@ -67,4 +68,4 @@ export type ExternalCardProps = {
   resume: string;
 } & Pick<AppliedCardProps, "noticePeriod" | "name" | "appliedOn"> & {
     variant: (typeof jobApplicationStatus)["EXTERNAL"];
-  };
+  } & Pick<CommonCardProps, "id">;
