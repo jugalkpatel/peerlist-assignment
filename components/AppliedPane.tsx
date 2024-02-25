@@ -1,7 +1,7 @@
 import { searchApplicants } from "@/helpers/search";
 import { useQueryParamState } from "@/hooks/useQueryParamState";
-import { selectAppliedApplicants } from "@/stores/counter-store";
-import { useApplicantStore } from "@/stores/counter-store-provider";
+import { selectAppliedApplicants } from "@/stores/applicant-store";
+import { useApplicantStore } from "@/stores/applicants-store-provider";
 import Card from "./Card";
 import { CardsContainer } from "./CardsContainer";
 import { Pane } from "./Pane";

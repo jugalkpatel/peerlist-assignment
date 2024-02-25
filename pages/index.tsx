@@ -17,11 +17,11 @@ import {
   setApplicantsToStore,
   setDragEndFn,
   setDragOverFn,
-} from "@/stores/counter-store";
+} from "@/stores/applicant-store";
 import {
   CounterStoreProvider,
   useApplicantStore,
-} from "@/stores/counter-store-provider";
+} from "@/stores/applicants-store-provider";
 import { Search } from "@/components/Search";
 import { RejectedPane } from "@/components/RejectedPane";
 import { AppliedPane } from "@/components/AppliedPane";
@@ -88,7 +88,7 @@ export function ApplicantDashboard() {
       <div className="grid grid-rows-1 grid-cols-1 h-screen relative lg:grid-cols-[minmax(100px,_212px),_1fr]">
         <Sidebar />
         <div className="overflow-auto">
-          <div className="sticky top-[60px] lg:top-0">
+          <div className="sticky top-[60px] lg:top-0 z-10">
             <Header />
             <Search />
           </div>

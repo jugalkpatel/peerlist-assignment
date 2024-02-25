@@ -1,4 +1,4 @@
-import { ApplicantStateValue } from "@/stores/counter-store";
+import { ApplicantStateValue } from "@/stores/applicant-store";
 import { JobApplicationStatus } from "@/types/common.types";
 
 export function searchApplicants(

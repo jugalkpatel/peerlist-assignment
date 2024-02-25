@@ -32,7 +32,7 @@ export type Candidate = {
   isHoldingOffer: boolean;
   noticePeriod: number;
   contact: CandidateContact;
-  referredBy: CandidateReferredBy;
+  referredBy: CandidateReferredBy | null;
   resume: string;
   jobApplicationProgress: CandidateJobApplicationProgress;
 };
@@ -52,6 +52,7 @@ export type RejectedCardProps = {
 } & CommonCardProps;
 
 export type AppliedCardProps = CommonCardProps & {
+  referredBy: Candidate["referredBy"];
   variant: (typeof jobApplicationStatus)["APPLIED"];
   experience: Candidate["experience"];
   isHoldingOffer: Candidate["isHoldingOffer"];
