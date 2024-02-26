@@ -20,3 +20,4 @@
 ## Deployed Link
 
 - [peerlist-assignment-six.vercel.app](https://peerlist-assignment-six.vercel.app/)
+- [https://peerlist-kanban.netlify.app/](https://peerlist-kanban.netlify.app/)
